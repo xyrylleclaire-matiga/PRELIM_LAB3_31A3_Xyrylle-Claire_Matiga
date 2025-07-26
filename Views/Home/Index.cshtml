@@ -9,28 +9,23 @@
 <table style="width: 100%; border-collapse: collapse; text-align: left; background-color: #ffe6f0; font-size: 18px; color: #4d004d;">
     <thead style="background-color: #ffccdd;">
         <tr style="border-bottom: 2px solid #ff99bb;">
-            <th style="padding: 12px; border: 1px solid #ff99bb;">Customer ID</th>
-            <th style="padding: 12px; border: 1px solid #ff99bb;">First Name</th>
-            <th style="padding: 12px; border: 1px solid #ff99bb;">Middle Name</th>
-            <th style="padding: 12px; border: 1px solid #ff99bb;">Last Name</th>
-            <th style="padding: 12px; border: 1px solid #ff99bb;">Birthday</th>
+            <th style="padding: 12px; border: 1px solid #ff99bb;">Customer Type</th>
+            <th style="padding: 12px; border: 1px solid #ff99bb;">Full Name</th>
             <th style="padding: 12px; border: 1px solid #ff99bb;">Age</th>
-            <th style="padding: 12px; border: 1px solid #ff99bb;">VIP Status</th>
+            <th style="padding: 12px; border: 1px solid #ff99bb;">Customer ID</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var customer in customerList)
         {
+            var fullName = $"{customer.FirstName} {customer.MiddleName.First()}. {customer.LastName}";
+            var type = customer is VipCustomer ? "VIP Customer" : "Regular Customer";
+
                 <tr style="border-bottom: 1px solid #ffb3c6;">
-                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.CustomerId</td>
-                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.FirstName</td>
-                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.MiddleName</td>
-                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.LastName</td>
-                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.bday.ToString("MMMM dd, yyyy")</td>
+                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@type</td>
+                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@fullName</td>
                     <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.GetAge()</td>
-                    <td style="padding: 10px; border: 1px solid #ffb3c6;">
-                    @(customer is VipCustomer vip ? "Yes" : "No")
-                    </td>
+                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.CustomerId</td>
                 </tr>
         }
     </tbody>
