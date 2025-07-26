@@ -1,7 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using PRELIM_LAB3_31A3_Xyrylle_Claire_Matiga.Models
+
+@{
+    var customerList = ViewBag.CustomerList as List<Customer>;
 }
 
-<h1 align = "center"><b>Customer</b></h1>
-<style>
-</style>
+<h2 style="color: #d63384; font-size: 32px; text-align: center;">Customer List</h2>
+<br />
+<table style="width: 100%; border-collapse: collapse; text-align: left; background-color: #ffe6f0; font-size: 18px; color: #4d004d;">
+    <thead style="background-color: #ffccdd;">
+        <tr style="border-bottom: 2px solid #ff99bb;">
+            <th style="padding: 12px; border: 1px solid #ff99bb;">Customer ID</th>
+            <th style="padding: 12px; border: 1px solid #ff99bb;">First Name</th>
+            <th style="padding: 12px; border: 1px solid #ff99bb;">Middle Name</th>
+            <th style="padding: 12px; border: 1px solid #ff99bb;">Last Name</th>
+            <th style="padding: 12px; border: 1px solid #ff99bb;">Birthday</th>
+            <th style="padding: 12px; border: 1px solid #ff99bb;">Age</th>
+            <th style="padding: 12px; border: 1px solid #ff99bb;">VIP Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in customerList)
+        {
+                <tr style="border-bottom: 1px solid #ffb3c6;">
+                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.CustomerId</td>
+                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.FirstName</td>
+                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.MiddleName</td>
+                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.LastName</td>
+                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.bday.ToString("MMMM dd, yyyy")</td>
+                    <td style="padding: 10px; border: 1px solid #ffb3c6;">@customer.GetAge()</td>
+                    <td style="padding: 10px; border: 1px solid #ffb3c6;">
+                    @(customer is VipCustomer vip ? "Yes" : "No")
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

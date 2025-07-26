@@ -7,11 +7,14 @@
        public string MiddleName { get; set; }
        public DateTime bday { get; set; }
 
-       public string GetFullname{
-            get { return $"{FirstName} {MiddleName} {LastName}"; }}
+        public string GetFullName(){
+            return $"{FirstName} {MiddleName[0]}. {LastName}";}
 
         public int GetAge(){
             return DateTime.Now.Year - bday.Year;}
-           
+
+        public virtual string GetDescription(){
+            return $"{GetFullName()} - {GetAge()} years old";}
+
     }
 }
